@@ -24,31 +24,41 @@ Summary:        Plasma Smoother Theme
 License:        GPL
 Group:          System/GUI/KDE
 Source0:        %{tarname}.tar.gz
+Source1:        LICENSE
 Url:            http://half-left.deviantart.com/
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  fdupes
 BuildRequires:	kde4-filesystem
 
+
 %description
 A nice smooth plasma theme designed by Sean Wilson
 
 http://half-left.deviantart.com/art/KDE4-Smoother-354277055
 
+
 %prep
-%setup -q -n %{tarname}
+%setup -q -c
+cp -a %{SOURCE1} COPYING
+
 
 %build
 
+
 %install
 mkdir -p %{buildroot}%{_kde4_appsdir}/desktoptheme
-cp -R $RPM_BUILD_DIR/%{tarname} %{buildroot}%{_kde4_appsdir}/desktoptheme
+cp -R %{tarname} %{buildroot}%{_kde4_appsdir}/desktoptheme
 
 %fdupes -s %{buildroot}
 
+
 %files
 %defattr(-,root,root)
+%doc COPYING
+%dir %{_kde4_appsdir}/desktoptheme
 %{_kde4_appsdir}/desktoptheme/Smoother/
+
 
 %changelog
 * Tue Jun 12 2014 kamaradalinux@gmail.com
